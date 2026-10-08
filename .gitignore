@@ -6,3 +6,5 @@ data/faces/*.jpg
 data/faces/*.jpeg
 data/faces/*.png
 *.whl 
+data/encodings.pkl
+data/faces/

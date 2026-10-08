@@ -1,49 +1,44 @@
 import cv2
 import face_recognition
+import pickle
+import os
 
-# -----------------------------
-# Load known face
-# -----------------------------
 
-known_image = cv2.imread("data/faces/paras.jpeg")
+# Load saved encodings
+encoding_file = "data/encodings.pkl"
 
-if known_image is None:
-    print("Error: Could not load paras.jpeg")
+if not os.path.exists(encoding_file):
+    print("Error: No registered students found.")
+    print("Run register_student.py first.")
     exit()
 
-# OpenCV: BGR → face_recognition: RGB
-known_image = cv2.cvtColor(known_image, cv2.COLOR_BGR2RGB)
+with open(encoding_file, "rb") as file:
+    data = pickle.load(file)
 
-known_image = known_image.astype("uint8")
-known_image = __import__("numpy").ascontiguousarray(known_image)
+known_face_encodings = data["encodings"]
+known_face_names = data["names"]
+
+# Get unique students
+registered_students = sorted(set(known_face_names))
+
+print(f"Loaded {len(registered_students)} registered student.")
+
+if len(registered_students) != 1:
+    print(f"Loaded {len(registered_students)} registered students.")
+
+print("Students:")
+
+for name in registered_students:
+    print(f"- {name}")
 
 
-encodings = face_recognition.face_encodings(known_image)
-
-if len(encodings) == 0:
-    print("Error: No face found in paras.jpeg")
-    exit()
-
-known_encoding = encodings[0]
-
-known_face_encodings = [known_encoding]
-known_face_names = ["Paras"]
-
-
-# -----------------------------
-# Start webcam
-# -----------------------------
-
+# Start camera
 cap = cv2.VideoCapture(0)
 
 if not cap.isOpened():
     print("Error: Could not open camera.")
     exit()
 
-
-# -----------------------------
-# Face recognition loop
-# -----------------------------
 
 while True:
 
@@ -52,13 +47,18 @@ while True:
     if not ret:
         break
 
-    # OpenCV BGR → RGB
-    rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    # Convert BGR to RGB
+    rgb_frame = cv2.cvtColor(
+        frame,
+        cv2.COLOR_BGR2RGB
+    )
 
     # Detect faces
-    face_locations = face_recognition.face_locations(rgb_frame)
+    face_locations = face_recognition.face_locations(
+        rgb_frame
+    )
 
-    # Generate embeddings
+    # Generate encodings
     face_encodings = face_recognition.face_encodings(
         rgb_frame,
         face_locations
@@ -69,16 +69,32 @@ while True:
         face_locations
     ):
 
-        # Compare with known face
+        # Compare with all saved encodings
         matches = face_recognition.compare_faces(
             known_face_encodings,
-            face_encoding
+            face_encoding,
+            tolerance=0.5
         )
 
         name = "Unknown"
 
         if True in matches:
-            name = "Paras"
+
+            matched_names = []
+
+            for i, match in enumerate(matches):
+
+                if match:
+                    matched_names.append(
+                        known_face_names[i]
+                    )
+
+            if matched_names:
+
+                name = max(
+                    set(matched_names),
+                    key=matched_names.count
+                )
 
         # Face coordinates
         top, right, bottom, left = face_location
