@@ -1,42 +1,65 @@
-# FacePay
+# FacePay — AI-Powered Contactless Campus Payment System
 
-AI-powered contactless campus payment system using face recognition.
+FacePay is an educational AI/ML project that aims to build a
+contactless campus payment prototype using face recognition,
+student records, and digital wallet management.
 
-## Project Overview
+The project combines computer vision, biometric matching,
+database management, and transaction processing.
 
-FacePay is a computer vision based campus payment system designed to provide a fast and contactless payment experience.
+## Project Objectives
 
-The system identifies a registered student using facial recognition and will later connect the identified student to a digital wallet and payment transaction system.
+The main objectives are:
 
-## Current Development Status
+- Register students using a webcam.
+- Detect faces in real time.
+- Recognize registered students using face encodings.
+- Store multiple face samples per student.
+- Maintain student records using SQLite.
+- Retrieve student wallet balances.
+- Process payments with balance validation.
+- Confirm payments using a thumbs-up gesture.
+- Maintain transaction history.
+- Explore liveness detection and anti-spoofing.
+- Evaluate recognition accuracy and system performance.
 
-### Day 1 - Face Recognition Foundation
-- Webcam capture using OpenCV
-- Real-time face detection
-- Face encoding generation
-- Face recognition
-- Unknown face detection
+This project is under active development. Not all planned
+features have been implemented.
 
-### Day 2 - Student Registration
-- Automatic student registration
-- Multiple face samples per student
-- 7 face encodings per registered student
-- Student-specific face image folders
-- Persistent face encoding storage
-- Multiple student recognition
-- Unknown person detection
+## Technology Stack
 
-## Current System Flow
+- Python 3.11.9
+- OpenCV
+- face_recognition
+- dlib
+- NumPy
+- Pillow
+- SQLite
+- MediaPipe (planned for gesture recognition)
 
-```text
-Webcam
-   ↓
-Face Detection
-   ↓
-Face Encoding
-   ↓
-Compare with Registered Encodings
-   ↓
-Student Identification
-   ↓
-Paras / Other Registered Student / Unknown
+## Current Features
+
+### Day 1 — Computer Vision Foundation
+
+- Webcam capture using OpenCV.
+- Real-time face detection.
+- Face encoding generation.
+- Basic face recognition.
+- Registered and unknown face classification.
+
+### Day 2 — Student Face Registration
+
+- Automatic webcam-based face sample collection.
+- Multiple face samples per student.
+- Local storage of student face images.
+- Persistent face encodings using a local pickle file.
+- Recognition using stored face encodings.
+
+### Day 3 — Student Database and Wallet Foundation
+
+- Student records table.
+- Transaction records table.
+- Student registration through a Python script.
+- Student lookup using a unique student ID.
+- Wallet balance retrieval.
+- Database persistence.
