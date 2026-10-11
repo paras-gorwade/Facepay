@@ -1,19 +1,23 @@
-# Python environment
-venv/
-
-# Python cache
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
 
-# Environment variables
-.env
+# Virtual environment
+venv/
+.venv/
+
+# Local databases and backups
+database/*.db
+database/*.db-*
+database/*.sqlite*
+*.db
+
+# Face data
+data/faces/
+data/encodings.pkl
 
 # Downloaded packages
 *.whl
 
-# Biometric data
-data/faces/
-data/encodings.pkl
-
-# Local SQLite database
-database/facepay.db
+# Secrets
+.env

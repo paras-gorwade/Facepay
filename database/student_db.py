@@ -1,3 +1,5 @@
+from contextlib import closing
+
 from database.db_setup import get_connection, initialize_database
 
 
@@ -14,22 +16,25 @@ def add_student(student_id, name, initial_balance=500.00):
 
     initialize_database()
 
-    with get_connection() as connection:
-        cursor = connection.execute(
-            """
-            INSERT INTO students (student_id, name, balance)
-            VALUES (?, ?, ?)
-            """,
-            (student_id.strip(), name.strip(), initial_balance),
-        )
+    # closing() closes the connection; "with connection" commits/rolls back
+    with closing(get_connection()) as connection:
+        with connection:
+            cursor = connection.execute(
+                """
+                INSERT INTO students (student_id, name, balance)
+                VALUES (?, ?, ?)
+                """,
+                (student_id.strip(), name.strip(), initial_balance),
+            )
+            rowcount = cursor.rowcount
 
-        print(f"Student added successfully: {name.strip()}")
-        return cursor.rowcount
+    print(f"Student added successfully: {name.strip()}")
+    return rowcount
 
 
 def get_student(student_id):
     """Retrieve a student by their unique ID."""
-    with get_connection() as connection:
+    with closing(get_connection()) as connection:
         cursor = connection.execute(
             """
             SELECT student_id, name, balance, created_at
@@ -38,7 +43,6 @@ def get_student(student_id):
             """,
             (student_id,),
         )
-
         row = cursor.fetchone()
 
     if row is None:
@@ -60,4 +64,3 @@ def get_wallet_balance(student_id):
         return None
 
     return student["balance"]
-

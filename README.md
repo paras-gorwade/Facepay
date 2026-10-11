@@ -39,27 +39,13 @@ features have been implemented.
 
 ## Current Features
 
-### Day 1 — Computer Vision Foundation
 
-- Webcam capture using OpenCV.
-- Real-time face detection.
-- Face encoding generation.
-- Basic face recognition.
-- Registered and unknown face classification.
+## Development Progress
 
-### Day 2 — Student Face Registration
-
-- Automatic webcam-based face sample collection.
-- Multiple face samples per student.
-- Local storage of student face images.
-- Persistent face encodings using a local pickle file.
-- Recognition using stored face encodings.
-
-### Day 3 — Student Database and Wallet Foundation
-
-- Student records table.
-- Transaction records table.
-- Student registration through a Python script.
-- Student lookup using a unique student ID.
-- Wallet balance retrieval.
-- Database persistence.
+| Day | Completed Work |
+|---|---|
+| Day 1 | Webcam capture, face detection, and basic recognition |
+| Day 2 | Student registration and multiple face samples |
+| Day 3 | SQLite database, student records, and wallet lookup |
+| Day 4 | Database lookup optimization and automated testing |
+| Day 5 | Wallet migration, payment processing, and transaction testing |
