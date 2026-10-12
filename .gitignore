@@ -1,23 +1,43 @@
-# Python
+# Python cache files
 __pycache__/
 *.py[cod]
+*$py.class
 
-# Virtual environment
+# Virtual environments
 venv/
 .venv/
+env/
+
+# Environment variables and secrets
+.env
+.env.*
 
 # Local databases and backups
 database/*.db
 database/*.db-*
-database/*.sqlite*
+database/*.sqlite
+database/*.sqlite3
 *.db
+*.sqlite
+*.sqlite3
 
-# Face data
+# Biometric data
 data/faces/
 data/encodings.pkl
 
-# Downloaded packages
+# Downloaded binary packages
 *.whl
 
-# Secrets
-.env
+# IDE settings
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Test and coverage artifacts
+.coverage
+htmlcov/
+.pytest_cache/
