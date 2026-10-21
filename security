@@ -1,0 +1,14 @@
+| Security risk                          | Required protection                                                   |
+| -------------------------------------- | --------------------------------------------------------------------- |
+| Someone else gives the thumbs-up       | Verify the authorized student's face continuously during confirmation |
+| The recognized face disappears         | Cancel the payment                                                    |
+| Another person replaces the student    | Cancel the payment if identity verification fails                     |
+| Two or more faces appear               | Cancel the payment                                                    |
+| Someone holds up a photograph          | Add face liveness and anti-spoofing checks                            |
+| Someone replays a previous gesture     | Require a fresh gesture for each payment                              |
+| Gesture detection is unstable          | Require a stable gesture held for a minimum duration                  |
+| Student has insufficient funds         | Enforce the balance check inside the database transaction             |
+| Two payments happen concurrently       | Preserve atomic wallet updates                                        |
+| The application crashes during payment | Prevent partial wallet/transaction updates                            |
+| A payment is cancelled                 | Do not deduct money                                                   |
+| Someone modifies the database directly | Add appropriate database access controls and integrity checks         |
