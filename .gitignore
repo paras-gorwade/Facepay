@@ -1,18 +1,23 @@
 # Python cache files
-__pycache__/
+
+**pycache**/
 *.py[cod]
 *$py.class
 
 # Virtual environments
+
 venv/
 .venv/
 env/
 
 # Environment variables and secrets
+
 .env
 .env.*
+!.env.example
 
 # Local databases and backups
+
 database/*.db
 database/*.db-*
 database/*.sqlite
@@ -22,22 +27,29 @@ database/*.sqlite3
 *.sqlite3
 
 # Biometric data
+
 data/faces/
 data/encodings.pkl
 
 # Downloaded binary packages
+
 *.whl
 
 # IDE settings
+
 .vscode/
 .idea/
 
 # Operating system files
+
 .DS_Store
 Thumbs.db
 desktop.ini
 
 # Test and coverage artifacts
+
 .coverage
 htmlcov/
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
